@@ -1,9 +1,14 @@
 const express = require('express');
+const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
+const bookshelf = require('bookshelf');
+const galleryRoute = require('./routes/gallery');
+const userRoute = require('./routes/users');
+const indexRoute = require('./routes/index');
 
 const User = require('./database/models/users');
 const gallery = require('./database/models/gallery');
@@ -12,13 +17,19 @@ const guard = require('./middleware/guard');
 const app = express();
 const PORT = 3000;
 
-app.use(express.static('public'));
+app.use(express.static('views'));
+app.engine('.hbs', exphbs({ extname: '.hbs' }));
+app.set('view engine', '.hbs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(session({ secret: 'keyboard cat' }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use('/gallery', galleryRoute);
+app.use('/user', userRoute);
+app.use('/', indexRoute);
+app.use(bookshelf);
 
 passport.use(
   new LocalStrategy((username, password, done) => {
@@ -35,7 +46,7 @@ passport.use(
           //Happy route: username exists, password matches
           if (user.password === password) {
             return done(null, user);
-          } 
+          }
           //Error route: Username exists, password does not match
           else {
             return done(null, false, { message: 'bad username or password' });
@@ -75,7 +86,7 @@ app.use(
   '/login',
   passport.authenticate('local', {
     successRedirect: '/secret',
-    failureRedirect: '/login.html',
+    failureRedirect: '/login.hbs',
   }),
 );
 
