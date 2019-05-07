@@ -86,7 +86,7 @@ app.use(
   '/login',
   passport.authenticate('local', {
     successRedirect: '/secret',
-    failureRedirect: '/login.hbs',
+    failureRedirect: '/login.html',
   }),
 );
 
