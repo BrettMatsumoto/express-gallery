@@ -5,7 +5,7 @@ const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 
-const users = require('./database/models/users');
+const User = require('./database/models/users');
 const gallery = require('./database/models/gallery');
 const guard = require('./middleware/guard');
 
@@ -22,7 +22,7 @@ app.use(passport.session());
 
 passport.use(
   new LocalStrategy((username, password, done) => {
-    return new username({ username: username })
+    return new User({ username: username })
       .fetch()
       .then((user) => {
         console.log(user);
