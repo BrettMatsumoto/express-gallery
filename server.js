@@ -5,12 +5,16 @@ const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 
+const users = require('./database/models/users');
 const gallery = require('./database/models/gallery');
 const guard = require('./middleware/guard');
 
+const app = express();
+const PORT = 3000;
+
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.JSON());
+app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(session({ secret: 'keyboard cat' }));
 app.use(passport.initialize());
@@ -31,7 +35,9 @@ passport.use(
           //Happy route: username exists, password matches
           if (user.password === password) {
             return done(null, user);
-          } else {
+          } 
+          //Error route: Username exists, password does not match
+          else {
             return done(null, false, { message: 'bad username or password' });
           }
         }
