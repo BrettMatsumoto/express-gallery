@@ -6,7 +6,7 @@ const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const bookshelf = require('bookshelf');
-const galleryRoute = require('./routes/gallery');
+const registerRoute = require('./routes/register');
 const userRoute = require('./routes/users');
 const indexRoute = require('./routes/index');
 
@@ -26,8 +26,8 @@ app.use(cookieParser());
 app.use(session({ secret: 'keyboard cat' }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('/gallery', galleryRoute);
-app.use('/user', userRoute);
+app.use('templates/register', registerRoute);
+app.use('templates/user', userRoute);
 app.use('/', indexRoute);
 app.use(bookshelf);
 
