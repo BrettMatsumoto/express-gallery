@@ -4,9 +4,9 @@ const express = require('express');
 const router = express.Router();
 const knex = require('../database/models/gallery');
 
-router.get('/register.html', (req, res) => {
-  console.log('reach register route');
-  res.render('/login.html');
+router.get('/', (req, res) => {
+  console.log('reached register route');
+  res.render('./register.hbs');
 });
 
 module.exports = router;
