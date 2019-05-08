@@ -1,3 +1,5 @@
+'use strict'
+
 const express = require('express');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
@@ -19,7 +21,7 @@ const app = express();
 const PORT = 3000;
 const saltRounds = 12;
 
-app.use(express.static('views'));
+app.use(express.static('public'));
 app.engine('.hbs', exphbs({ extname: '.hbs' }));
 app.set('view engine', '.hbs');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -94,7 +96,7 @@ app.use(
   }),
 );
 
-app.post('/register', (req, res) => {
+app.post('/register.html', (req, res) => {
   bcrypt.genSalt(saltRounds, (err, res) => {
     if (err) {
       return 500;
@@ -112,7 +114,7 @@ app.post('/register', (req, res) => {
         .save()
         .then((user) => {
           console.log(user);
-          return res.redirect('login.html');
+          return res.redirect('/login.html');
         })
         .catch((err) => {
           console.log(err);
