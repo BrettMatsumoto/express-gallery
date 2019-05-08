@@ -3,7 +3,7 @@ const router = express.Router();
 const knex = require('../database/models/gallery');
 
 router
-  .get('/register', (req, res) => {
+  .get('/register.html', (req, res) => {
     console.log('reach register route')
     res.render('/register.html');
   })

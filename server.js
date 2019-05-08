@@ -112,7 +112,7 @@ app.post('/register', (req, res) => {
         .save()
         .then((user) => {
           console.log(user);
-          return res.redirect('/login.html');
+          return res.redirect('login.html');
         })
         .catch((err) => {
           console.log(err);
