@@ -6,7 +6,7 @@ const knex = require('../database/models/gallery');
 
 router.get('/', (req, res) => {
   console.log('reached register route');
-  res.render('./register.hbs');
+  res.render('./templates/register.hbs');
 });
 
 module.exports = router;

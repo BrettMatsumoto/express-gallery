@@ -5,7 +5,7 @@ const router = express.Router();
 const knex = require('../database/models/gallery');
 
 router.get('/', (req, res) => {
-  res.render('../index.hbs');
+  res.render('./index.hbs');
 });
 
 module.exports = router;

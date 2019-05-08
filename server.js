@@ -23,9 +23,11 @@ const PORT = 3000;
 const saltRounds = 12;
 
 app.use(express.static('public'));
-app.engine('.hbs', exphbs({ extname: '.hbs' }));
+app.engine('.hbs', exphbs({ 
+  extname: '.hbs',
+  partialsDir: __dirname + '/views/partials/',
+  layoutsDir: __dirname + '/views/templates/'}));
 app.set('view engine', '.hbs');
-app.set('views', 'views/templates');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -103,17 +105,21 @@ app.use(
   }),
 );
 
-app.post('/register.html', (req, res) => {
+app.post('/register', (req, res) => {
+  console.log('hits post register');
+  console.log(req.body);
   bcrypt.genSalt(saltRounds, (err, res) => {
+    console.log('saltRounds', res)
     if (err) {
       return 500;
     }
 
     bcrypt.hash(req.body.password, salt, (err, hash) => {
+      console.log(hash);
       if (err) {
+        console.log(err);
         return 500;
       }
-
       return new User({
         username: req.body.username,
         password: req.body.password,
@@ -121,7 +127,7 @@ app.post('/register.html', (req, res) => {
         .save()
         .then((user) => {
           console.log(user);
-          return res.redirect('/login.html');
+          return res.redirect('/login');
         })
         .catch((err) => {
           console.log(err);
