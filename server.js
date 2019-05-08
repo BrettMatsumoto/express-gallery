@@ -9,6 +9,7 @@ const bookshelf = require('bookshelf');
 const registerRoute = require('./routes/register');
 const userRoute = require('./routes/users');
 const indexRoute = require('./routes/index');
+const bcrypt = require('bcryptjs');
 
 const User = require('./database/models/users');
 const gallery = require('./database/models/gallery');
@@ -16,6 +17,7 @@ const guard = require('./middleware/guard');
 
 const app = express();
 const PORT = 3000;
+const saltRounds = 12;
 
 app.use(express.static('views'));
 app.engine('.hbs', exphbs({ extname: '.hbs' }));
@@ -43,14 +45,16 @@ passport.use(
         } else {
           user = user.toJSON();
 
-          //Happy route: username exists, password matches
-          if (user.password === password) {
-            return done(null, user);
-          }
-          //Error route: Username exists, password does not match
-          else {
-            return done(null, false, { message: 'bad username or password' });
-          }
+          bcrypt.compare(password, user.password).then((res) => {
+            //Happy route: username exists, password matches
+            if (user.password === password) {
+              return done(null, user);
+            }
+            //Error route: Username exists, password does not match
+            else {
+              return done(null, false, { message: 'bad username or password' });
+            }
+          });
         }
       })
       .catch((err) => {
@@ -91,19 +95,31 @@ app.use(
 );
 
 app.post('/register', (req, res) => {
-  return new User({
-    username: req.body.username,
-    password: req.body.password,
-  })
-    .save()
-    .then((user) => {
-      console.log(user);
-      return res.redirect('/login.html');
-    })
-    .catch((err) => {
-      console.log(err);
-      return res.send('Error creating account');
+  bcrypt.genSalt(saltRounds, (err, res) => {
+    if (err) {
+      return 500;
+    }
+
+    bcrypt.hash(req.body.password, salt, (err, hash) => {
+      if (err) {
+        return 500;
+      }
+
+      return new User({
+        username: req.body.username,
+        password: req.body.password,
+      })
+        .save()
+        .then((user) => {
+          console.log(user);
+          return res.redirect('/login.html');
+        })
+        .catch((err) => {
+          console.log(err);
+          return res.send('Error creating account');
+        });
     });
+  });
 });
 
 app.listen(PORT, () => {
