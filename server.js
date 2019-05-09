@@ -13,15 +13,18 @@ const indexRoute = require('./routes/index');
 const loginRoute = require('./routes/login');
 const bcrypt = require('bcryptjs');
 const knex = require('./database/knex');
+const redis = require('connect-redis')(session);
 
 const User = require('./database/models/users');
 const gallery = require('./database/models/gallery');
 const guard = require('./middleware/guard');
 
-const app = express();
 const PORT = 3000;
 const saltRounds = 12;
 
+require('dotenv').config();
+
+const app = express();
 app.use(express.static('public'));
 app.engine('.hbs', exphbs({ 
   extname: '.hbs',
@@ -31,7 +34,12 @@ app.set('view engine', '.hbs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(session({ secret: 'keyboard cat' }));
+app.use(session({ 
+  store: new redis({ url: process.env.REDIS_URL }),
+  secret: process.env.REDIS_SECRET,
+  resave: false,
+  saveUninitialized: false
+ }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/register', registerRoute);
@@ -106,18 +114,15 @@ app.use(
 );
 
 app.post('/register', (req, res) => {
-  console.log('hits post register');
-  console.log(req.body);
-  bcrypt.genSalt(saltRounds, (err, res) => {
-    console.log('saltRounds', res)
+  bcrypt.genSalt(saltRounds, (err, salt) => {
     if (err) {
       return 500;
     }
 
     bcrypt.hash(req.body.password, salt, (err, hash) => {
-      console.log(hash);
+      console.log('salt: ', salt);
+      console.log('hash: ', hash);
       if (err) {
-        console.log(err);
         return 500;
       }
       return new User({
@@ -137,6 +142,10 @@ app.post('/register', (req, res) => {
   });
 });
 
+app.get('/logout', (req, res) => {
+  req.logout();
+  res.send('logged out');
+});
 
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}.`);
