@@ -2,10 +2,15 @@
 
 const express = require('express');
 const router = express.Router();
-const knex = require('../database/models/gallery');
+const Gallery = require('../database/models/Gallery');
 
 router.get('/', (req, res) => {
-  res.render('./index.hbs');
+  new Gallery()
+  .fetchAll()
+  .then((result) => {
+    console.log(result.toJSON());
+    return res.render('index.hbs');
+  })
 });
 
 module.exports = router;
