@@ -15,8 +15,8 @@ const bcrypt = require('bcryptjs');
 const knex = require('./database/knex');
 const redis = require('connect-redis')(session);
 
-const User = require('./database/models/users');
-const gallery = require('./database/models/gallery');
+const User = require('./database/models/User');
+const Gallery = require('./database/models/Gallery');
 const guard = require('./middleware/guard');
 
 const PORT = 3000;
@@ -61,8 +61,7 @@ passport.use(
 
           bcrypt.compare(password, user.password).then((res) => {
             //Happy route: username exists, password matches
-            console.log('user: ', user)
-            if (user.password === password) {
+            if (res) {
               return done(null, user);
             }
             //Error route: Username exists, password does not match
@@ -73,7 +72,7 @@ passport.use(
         }
       })
       .catch((err) => {
-        console.log('error ', err);
+        console.log('error', err);
         return done(err);
       });
   }),
@@ -91,7 +90,12 @@ passport.deserializeUser(function(user, done) {
 });
 
 app.get('/', (req, res) => {
-  res.render('index.hbs');
+  new Gallery()
+  .fetchAll()
+  .then((result) => {
+    console.log(result.toJSON());
+    return res.render('index.hbs');
+  })
 });
 
 app.get('/smoke', (req, res) => {
@@ -110,7 +114,7 @@ app.use('/login', loginRoute);
 app.post(
   '/login',
   passport.authenticate('local', {
-    successRedirect: '/secret',
+    successRedirect: '/',
     failureRedirect: '/login',
   }),
 );
