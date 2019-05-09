@@ -51,15 +51,17 @@ passport.use(
     return new User({ username: username })
       .fetch()
       .then((user) => {
-        console.log(user);
+        // console.log('user :', user);
 
         if (user === null) {
           return done(null, false, { message: 'Invalid Credentials' });
         } else {
           user = user.toJSON();
+          // console.log('userJSON: ', user);
 
           bcrypt.compare(password, user.password).then((res) => {
             //Happy route: username exists, password matches
+            console.log('user: ', user)
             if (user.password === password) {
               return done(null, user);
             }
@@ -105,7 +107,7 @@ app.get('/secret', guard, (req, res) => {
 
 app.use('/login', loginRoute);
 
-app.use(
+app.post(
   '/login',
   passport.authenticate('local', {
     successRedirect: '/secret',
