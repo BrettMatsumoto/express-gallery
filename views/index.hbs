@@ -16,29 +16,20 @@
       and create amazing digital images to inspire others to follow in our innovate steps. Free Architect WordPress</h4>
   </div>
   <div id="pictures">
-    <div id="bigPictures">
-      <img src="https://assets.pernod-ricard.com/nz/media_images/test.jpg?hUV74FvXQrWUBk1P2.fBvzoBUmjZ1wct">
-    </div>
+  {{each gallery}}
+      <a href="/details/{{id}}" id="bigPicture">
+        <img src='{{link}}'>
+        <h4>{{author}}</h4>
+        <h4>{{description}}</h4>
+      </a>
     <div id="smallPictures">
-      <div class="img">
-        <img src='https://assets.pernod-ricard.com/nz/media_images/test.jpg?hUV74FvXQrWUBk1P2.fBvzoBUmjZ1wct'>
-      </div>
-      <div class="img">
-        <img src='https://assets.pernod-ricard.com/nz/media_images/test.jpg?hUV74FvXQrWUBk1P2.fBvzoBUmjZ1wct'>
-      </div>
-      <div class="img">
-        <img src='https://assets.pernod-ricard.com/nz/media_images/test.jpg?hUV74FvXQrWUBk1P2.fBvzoBUmjZ1wct'>
-      </div>
-      <div class="img">
-        <img src='https://assets.pernod-ricard.com/nz/media_images/test.jpg?hUV74FvXQrWUBk1P2.fBvzoBUmjZ1wct'>
-      </div>
-      <div class="img">
-        <img src='https://assets.pernod-ricard.com/nz/media_images/test.jpg?hUV74FvXQrWUBk1P2.fBvzoBUmjZ1wct'>
-      </div>
-      <div class="img">
-        <img src='https://assets.pernod-ricard.com/nz/media_images/test.jpg?hUV74FvXQrWUBk1P2.fBvzoBUmjZ1wct'>
-      </div>
-    </div>
+      <a href="/details/{{id}}" class="smallPictures">
+        <img src="{{link}}">
+        <h4>{{author}}</h4>
+        <h4>{{description}}</h4>
+      </a>
+    </div> --}}
+  {{!-- {{/each}}
   </div>
 </body>
 
