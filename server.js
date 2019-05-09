@@ -89,15 +89,6 @@ passport.deserializeUser(function(user, done) {
   done(null, user);
 });
 
-app.get('/', (req, res) => {
-  new Gallery()
-  .fetchAll()
-  .then((result) => {
-    console.log(result.toJSON());
-    return res.render('index.hbs');
-  })
-});
-
 app.get('/smoke', (req, res) => {
   console.log('In smoke route');
   console.log(req.user);
