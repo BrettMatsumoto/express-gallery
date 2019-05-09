@@ -120,14 +120,14 @@ app.post('/register', (req, res) => {
     }
 
     bcrypt.hash(req.body.password, salt, (err, hash) => {
-      console.log('salt: ', salt);
-      console.log('hash: ', hash);
       if (err) {
         return 500;
       }
+      console.log(req.body.password);
       return new User({
         username: req.body.username,
-        password: req.body.password,
+        password: hash,
+        email: req.body.email
       })
         .save()
         .then((user) => {
