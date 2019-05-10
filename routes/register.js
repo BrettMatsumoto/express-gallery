@@ -9,4 +9,5 @@ router.get('/', (req, res) => {
   res.render('./templates/register.hbs');
 });
 
+
 module.exports = router;
