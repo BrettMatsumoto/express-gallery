@@ -6,6 +6,7 @@ exports.up = function(knex, Promise) {
     table.string('author').notNull();
     table.string('link').notNull();
     table.string('description').notNull();
+    table.integer('user_id').notNull();
   })
 };
 
