@@ -1,5 +1,7 @@
 'use strict';
 
+const bcrypt = require('bcryptjs');
+
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
   return knex('users').del()
