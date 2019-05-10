@@ -2,9 +2,8 @@
 
 const express = require('express');
 const router = express.Router();
-const guard = require('./middleware/guard');
 const Gallery = require('../database/models/Gallery');
-const users = require('../database/models/User');
+const guard = require('../middleware/guard');
 
 router.get('/:id', guard, (req, res) => {
   new Gallery().fetchAll().then((result) => {
