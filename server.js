@@ -11,7 +11,7 @@ const registerRoute = require('./routes/register');
 const userRoute = require('./routes/users');
 const indexRoute = require('./routes/index');
 const loginRoute = require('./routes/login');
-const detailsRoute = require('./routes/details');
+const galleryRoute = require('./routes/gallery');
 const bcrypt = require('bcryptjs');
 const knex = require('./database/knex');
 const redis = require('connect-redis')(session);
@@ -45,7 +45,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use('/register', registerRoute);
 app.use('/user', userRoute);
-app.use('/details', detailsRoute);
+app.use('/gallery', galleryRoute);
 app.use('/login', loginRoute);
 app.use('/', indexRoute);
 

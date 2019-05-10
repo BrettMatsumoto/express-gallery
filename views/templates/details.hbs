@@ -24,14 +24,18 @@
             <button>Register</button>
         </a>
     </div>
-
+   <div>
+        <a href="/gallery/new">
+            <button>New Image</button>
+        </a>
+    </div>
     <div id="pictures">
         <img src='{{link}}'>
         <h4>{{author}}</h4>
         <h4>{{description}}</h4>
         {{#each smallPictures}}
         <div id="smallPictures">
-            <a href="/details/{{id}}" class="smallPictures">
+            <a href="/gallery/{{id}}" class="smallPictures">
                 <img src="{{link}}">
                 <h4>{{author}}</h4>
                 <h4>{{description}}</h4>

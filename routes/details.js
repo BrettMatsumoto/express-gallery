@@ -25,7 +25,7 @@ router.get('/:id', guard, (req, res) => {
       }
     }
 
-    return res.render('templates/details.hbs', data);
+    return res.render('templates/gallery.hbs', data);
   });
 });
 
