@@ -6,7 +6,7 @@ const knex = require('../database/models/User');
 
 router
   .get('/', (req, res) => {
-    res.render('templates/users.hbs');
+    res.render('./templates/user.hbs');
   })
 
 module.exports = router;
