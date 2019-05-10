@@ -46,6 +46,7 @@ app.use(passport.session());
 app.use('/register', registerRoute);
 app.use('/user', userRoute);
 app.use('/details', detailsRoute);
+app.use('/login', loginRoute);
 app.use('/', indexRoute);
 
 passport.use(
@@ -53,13 +54,11 @@ passport.use(
     return new User({ username: username })
       .fetch()
       .then((user) => {
-        // console.log('user :', user);
 
         if (user === null) {
           return done(null, false, { message: 'Invalid Credentials' });
         } else {
           user = user.toJSON();
-          // console.log('userJSON: ', user);
 
           bcrypt.compare(password, user.password).then((res) => {
             //Happy route: username exists, password matches
@@ -81,20 +80,14 @@ passport.use(
 );
 
 passport.serializeUser(function(user, done) {
-  // console.log('serializing');
   return done(null, user);
 });
 
 passport.deserializeUser(function(user, done) {
-  // console.log('deserializing');
-  // console.log(user);
   done(null, user);
 });
 
 app.get('/smoke', (req, res) => {
-  // console.log('In smoke route');
-  // console.log(req.user);
-  // console.log(req.isAuthenticated());
   return res.send('smoke test.');
 });
 
@@ -102,7 +95,6 @@ app.get('/secret', guard, (req, res) => {
   return res.send('You found 17!');
 });
 
-app.use('/login', loginRoute);
 
 app.post(
   '/login',
