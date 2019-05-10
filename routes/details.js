@@ -2,6 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
 const Gallery = require('../database/models/Gallery');
 const users = require('../database/models/User');
 
@@ -29,6 +30,10 @@ router.get('/:id', (req, res) => {
     console.log('data', data);
     return res.render('templates/details.hbs', data);
   });
+  // passport.authenticate('local', {
+  //   successRedirect: '/',
+  //   failureRedirect: '/login'
+  // });
 });
 
 module.exports = router;
