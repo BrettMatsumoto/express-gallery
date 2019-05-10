@@ -44,7 +44,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/register', registerRoute);
-app.use('templates/user', userRoute);
+app.use('/user', userRoute);
 app.use('/details', detailsRoute);
 app.use('/', indexRoute);
 
