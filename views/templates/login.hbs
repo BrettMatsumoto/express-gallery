@@ -9,7 +9,17 @@
 </head>
 
 <body>
-  {{> header}}
+
+  <div>
+    <a href="./">
+      <button>Home</button>
+    </a>
+  </div>
+  <div>
+    <a href="./register">
+      <button>Register</button>
+    </a>
+  </div>
   <form action="/login" method="POST">
     <div>
       <label>Username:</label>
@@ -23,12 +33,6 @@
       <input type="submit" value="Log In" />
     </div>
   </form>
-
-  <div>
-    <a href="./register">
-      <button>Register</button>
-    </a>
-  </div>
 
 </body>
 
