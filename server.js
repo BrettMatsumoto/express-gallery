@@ -11,6 +11,7 @@ const registerRoute = require('./routes/register');
 const userRoute = require('./routes/users');
 const indexRoute = require('./routes/index');
 const loginRoute = require('./routes/login');
+const detailsRoute = require('./routes/details');
 const bcrypt = require('bcryptjs');
 const knex = require('./database/knex');
 const redis = require('connect-redis')(session);
@@ -44,6 +45,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use('/register', registerRoute);
 app.use('templates/user', userRoute);
+app.use('/details', detailsRoute);
 app.use('/', indexRoute);
 
 passport.use(
@@ -79,20 +81,20 @@ passport.use(
 );
 
 passport.serializeUser(function(user, done) {
-  console.log('serializing');
+  // console.log('serializing');
   return done(null, user);
 });
 
 passport.deserializeUser(function(user, done) {
-  console.log('deserializing');
-  console.log(user);
+  // console.log('deserializing');
+  // console.log(user);
   done(null, user);
 });
 
 app.get('/smoke', (req, res) => {
-  console.log('In smoke route');
-  console.log(req.user);
-  console.log(req.isAuthenticated());
+  // console.log('In smoke route');
+  // console.log(req.user);
+  // console.log(req.isAuthenticated());
   return res.send('smoke test.');
 });
 
@@ -120,7 +122,7 @@ app.post('/register', (req, res) => {
       if (err) {
         return 500;
       }
-      console.log(req.body.password);
+      // console.log(req.body.password);
       return new User({
         username: req.body.username,
         password: hash,
