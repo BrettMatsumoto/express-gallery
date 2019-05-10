@@ -5,7 +5,7 @@ const router = express.Router();
 const knex = require('../database/models/User');
 const guard = require('../middleware/guard');
 
-router.get('/', (req, res) => {
+router.get('/', guard, (req, res) => {
   res.render('./templates/user.hbs');
 });
 
