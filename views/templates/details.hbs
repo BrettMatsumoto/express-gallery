@@ -1,1 +1,28 @@
-<h1>Hello World</h1>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>I work now</h1>
+    <div id="pictures">
+        <img src='{{link}}'>
+        <h4>{{author}}</h4>
+        <h4>{{description}}</h4>
+        {{#each smallPictures}}
+        <div id="smallPictures">
+            <a href="/details/{{id}}" class="smallPictures">
+                <img src="{{link}}">
+                <h4>{{author}}</h4>
+                <h4>{{description}}</h4>
+            </a>
+        </div>
+        {{/each}}
+</body>
+
+</html>
