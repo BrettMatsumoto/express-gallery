@@ -16,12 +16,12 @@
       and create amazing digital images to inspire others to follow in our innovate steps. Free Architect WordPress</h4>
   </div>
   <div id="pictures">
-  {{each gallery}}
       <a href="/details/{{id}}" id="bigPicture">
         <img src='{{link}}'>
         <h4>{{author}}</h4>
         <h4>{{description}}</h4>
       </a>
+  {{#each smallPictures}}
     <div id="smallPictures">
       <a href="/details/{{id}}" class="smallPictures">
         <img src="{{link}}">
