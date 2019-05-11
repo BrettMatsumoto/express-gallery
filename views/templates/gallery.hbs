@@ -34,9 +34,11 @@
         <h4>{{author}}</h4>
         <h4>{{description}}</h4>
         <div>
-            <a href="/gallery/{{id}}?_method=DELETE">
+            <form action="/gallery/{{id}}?_method=DELETE" method="POST">
                 <button>Delete Image</button>
-            </a>
+            </form>
+            {{!-- <a href="/gallery/{{id}}?_method=DELETE" method="POST">
+            </a> --}}
             <a href="/gallery/{{id}}/edit">
                 <button>Update Image</button>
             </a>
@@ -49,7 +51,7 @@
                 <h4>{{description}}</h4>
             </a>
             <div>
-                <a href="/gallery/{{id}}?_method=DELETE">
+                <a href="/gallery/{{id}}?_method=DELETE" method="POST">
                     <button>Delete Image</button>
                 </a>
                 <a href="/gallery/{{id}}/edit">
