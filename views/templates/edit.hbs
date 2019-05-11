@@ -9,27 +9,28 @@
 </head>
 
 <body>
-    <form action="/:id?_method=PUT" method="POST">
+    <form action="/gallery/{{id}}?_method=PUT" method="POST">
         <label for="author">Author:</label><br>
-        <input type="text" name="author" />
+        <input type="text" name="author" value='{{author}}' />
 
         <br><br>
 
         <label for="link">Link:</label><br>
-        <input type="text" name="link">
+        <input type="text" name="link" value="{{link}}">
 
         <br><br>
 
         <label for="description">Description:</label><br>
-        <input type="text" name="description">
+        <input type="text" name="description" value="{{description}}">
 
         <br><br>
 
         <button>Update</button>
-        <div id="pictures">
-            <img src='{{link}}'>
-            <h4>{{author}}</h4>
-            <h4>{{description}}</h4>
+    </form>
+    <div id="pictures">
+        <img src='{{link}}'>
+        <h4>{{author}}</h4>
+        <h4>{{description}}</h4>
 </body>
 
 </html>
