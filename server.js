@@ -84,7 +84,7 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(user, done) {
-  console.log(user);
+  // console.log(user);
   done(null, user);
 });
 
@@ -123,7 +123,7 @@ app.post('/register', (req, res) => {
       })
         .save()
         .then((user) => {
-          console.log(user);
+          // console.log(user);
           return res.redirect('/login');
         })
         .catch((err) => {
