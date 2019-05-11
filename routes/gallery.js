@@ -53,8 +53,8 @@ router.post('/new', guard, (req, res) => {
     });
 });
 
-router.put('/:id', guard, (req, res) => {
-  return new Gallery
+router.put(guard, (req, res) => {
+  new Gallery
     .save({
       author: req.body.author,
       link: req.body.link,
@@ -65,8 +65,12 @@ router.put('/:id', guard, (req, res) => {
     })
 });
 
-router.delete('/:id', guard, (req, res) => {
-  
+router.delete(guard, (req, res) => {
+  Gallery.where({id: req.params.id})
+    .destroy()
+    .then(() => {
+      res.redirect('/gallery')
+    })
 })
 
 module.exports = router;
