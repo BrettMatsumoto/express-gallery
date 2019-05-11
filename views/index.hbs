@@ -1,0 +1,36 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Home</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  {{> header}}
+  <div id="header">
+    <div id="title">_ARCHITEKT</div>
+    <h4>Welcome to our online portfolio, we are a small group of passionate designers and architects, looking to change
+      and create amazing digital images to inspire others to follow in our innovate steps. Free Architect WordPress</h4>
+  </div>
+  <div id="pictures">
+      <a href="/gallery/{{id}}" id="bigPicture">
+        <img src='{{link}}'>
+        <h4>{{author}}</h4>
+        <h4>{{description}}</h4>
+      </a>
+  {{#each smallPictures}}
+    <div id="smallPictures">
+      <a href="/gallery/{{id}}" class="smallPictures">
+        <img src="{{link}}">
+        <h4>{{author}}</h4>
+        <h4>{{description}}</h4>
+      </a>
+    </div>
+  {{/each}}
+  </div>
+</body>
+
+</html>

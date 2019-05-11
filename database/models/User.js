@@ -1,3 +1,5 @@
+'use strict';
+
 const bookshelf = require('../bookshelf');
 
 class User extends bookshelf.Model {
