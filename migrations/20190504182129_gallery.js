@@ -7,6 +7,7 @@ exports.up = function(knex, Promise) {
     table.string('link').notNull();
     table.string('description').notNull();
     table.integer('user_id').notNull();
+    table.timestamps(true, true);
   })
 };
 
