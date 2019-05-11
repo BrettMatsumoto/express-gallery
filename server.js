@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const express = require('express');
 const exphbs = require('express-handlebars');
@@ -29,20 +29,26 @@ require('dotenv').config();
 const app = express();
 app.use(express.static('public'));
 app.use(methodOveride('_method'));
-app.engine('.hbs', exphbs({ 
-  extname: '.hbs',
-  partialsDir: __dirname + '/views/partials/',
-  layoutsDir: __dirname + '/views/templates/'}));
+app.engine(
+  '.hbs',
+  exphbs({
+    extname: '.hbs',
+    partialsDir: __dirname + '/views/partials/',
+    layoutsDir: __dirname + '/views/templates/',
+  }),
+);
 app.set('view engine', '.hbs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(session({ 
-  store: new redis({ url: process.env.REDIS_URL }),
-  secret: process.env.REDIS_SECRET,
-  resave: false,
-  saveUninitialized: false
- }));
+app.use(
+  session({
+    store: new redis({ url: process.env.REDIS_URL }),
+    secret: process.env.REDIS_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  }),
+);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/register', registerRoute);
@@ -56,7 +62,6 @@ passport.use(
     return new User({ username: username })
       .fetch()
       .then((user) => {
-
         if (user === null) {
           return done(null, false, { message: 'Invalid Credentials' });
         } else {
@@ -98,7 +103,6 @@ app.get('/secret', guard, (req, res) => {
   return res.send('You found 17!');
 });
 
-
 app.post(
   '/login',
   passport.authenticate('local', {
@@ -121,7 +125,7 @@ app.post('/register', (req, res) => {
       return new User({
         username: req.body.username,
         password: hash,
-        email: req.body.email
+        email: req.body.email,
       })
         .save()
         .then((user) => {
@@ -138,7 +142,7 @@ app.post('/register', (req, res) => {
 
 app.get('/logout', (req, res) => {
   req.logout();
-  res.send('logged out');
+  res.send('Logged Out');
 });
 
 app.listen(PORT, () => {
