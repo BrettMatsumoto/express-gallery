@@ -6,9 +6,14 @@ const Gallery = require('../database/models/Gallery');
 const guard = require('../middleware/guard');
 
 router.get('/new', (req, res) => {
-  console.log('/new route works');
+  // console.log('/new route works');
   return res.render('templates/new.hbs');
 });
+
+// router.get('/:id/edit', (req, res) => {
+//   console.log('/:id/edit route works');
+//   return res.render('templates/gallery')
+// })
 
 router.get('/:id', guard, (req, res) => {
   new Gallery().fetchAll().then((result) => {
@@ -33,6 +38,20 @@ router.get('/:id', guard, (req, res) => {
     return res.render('templates/gallery.hbs', data);
   });
 });
+
+router.post('/gallery/new', guard, (req, res) => {
+  return new Gallery({
+    author: req.body.author,
+    link: req.body.link,
+    description: req.body.description,
+    user_id: req.body.user_id
+  })
+  .save()
+  .then((user) => {
+    // console.log(user);
+    return res.redirect('templates/gallery.hbs');
+  })
+})
 
 
 module.exports = router;
