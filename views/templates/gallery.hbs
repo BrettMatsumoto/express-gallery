@@ -24,7 +24,7 @@
             <button>Register</button>
         </a>
     </div>
-   <div>
+    <div>
         <a href="/gallery/new">
             <button>New Image</button>
         </a>
@@ -33,6 +33,14 @@
         <img src='{{link}}'>
         <h4>{{author}}</h4>
         <h4>{{description}}</h4>
+        <div>
+            <a href="/gallery/{{id}}?_method=DELETE">
+                <button>Delete Image</button>
+            </a>
+            <a href="/gallery/{{id}}/edit">
+                <button>Update Image</button>
+            </a>
+        </div>
         {{#each smallPictures}}
         <div id="smallPictures">
             <a href="/gallery/{{id}}" class="smallPictures">
@@ -40,6 +48,14 @@
                 <h4>{{author}}</h4>
                 <h4>{{description}}</h4>
             </a>
+            <div>
+                <a href="/gallery/{{id}}?_method=DELETE">
+                    <button>Delete Image</button>
+                </a>
+                <a href="/gallery/{{id}}/edit">
+                    <button>Update Image</button>
+                </a>
+            </div>
         </div>
         {{/each}}
 </body>
