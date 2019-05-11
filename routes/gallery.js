@@ -12,7 +12,27 @@ router.get('/new', (req, res) => {
 
 router.get('/:id/edit', (req, res) => {
   console.log('/:id/edit route works');
-  return res.render('templates/edit');
+  new Gallery().fetchAll().then((result) => {
+    result = result.toJSON();
+
+    let data;
+
+    for (let i = 0; i < result.length; i++) {
+      if (result[i].id === parseInt(req.params.id)) {
+        let target = result.splice(i, 1)[0];
+
+        data = {
+          id: target.id,
+          author: target.author,
+          link: target.link,
+          description: target.description,
+        };
+      }
+    }
+
+    console.log('data console.log*****', data);
+    return res.render('templates/edit', data);
+  });
 });
 
 router.get('/:id', guard, (req, res) => {
@@ -53,24 +73,31 @@ router.post('/new', guard, (req, res) => {
     });
 });
 
-router.put(guard, (req, res) => {
-  new Gallery
+router.put('/:id', guard, (req, res) => {
+  // console.log('req.params.id console.log****************', req.params.id)
+  console.log('typeof data for req.params.id', typeof req.params.id);
+  new Gallery()
+    .where({ id: parseInt(req.params.id) })
     .save({
       author: req.body.author,
       link: req.body.link,
-      description: req.body.description
-    })
+      description: req.body.description,
+      user_id: req.user.id,
+    },
+    {patch: true})
     .then(() => {
-      return res.redirect('/')
-    })
+      return res.redirect('/');
+    });
 });
 
-router.delete(guard, (req, res) => {
-  Gallery.where({id: req.params.id})
+router.delete('/:id', guard, (req, res) => {
+  console.log('hits delete route');
+  new Gallery()
+    .where({ id: req.params.id })
     .destroy()
     .then(() => {
-      res.redirect('/gallery')
-    })
-})
+      return res.redirect('/');
+    });
+});
 
 module.exports = router;
