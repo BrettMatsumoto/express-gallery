@@ -10,10 +10,10 @@ router.get('/new', (req, res) => {
   return res.render('templates/new.hbs');
 });
 
-// router.get('/:id/edit', (req, res) => {
-//   console.log('/:id/edit route works');
-//   return res.render('templates/gallery')
-// })
+router.get('/:id/edit', (req, res) => {
+  console.log('/:id/edit route works');
+  return res.render('templates/edit');
+});
 
 router.get('/:id', guard, (req, res) => {
   new Gallery().fetchAll().then((result) => {
@@ -44,14 +44,29 @@ router.post('/new', guard, (req, res) => {
     author: req.body.author,
     link: req.body.link,
     description: req.body.description,
-    user_id: req.body.user_id
+    user_id: req.user.id,
   })
-  .save()
-  .then((user) => {
-    // console.log(user);
-    return res.redirect('templates/gallery.hbs');
-  })
-})
+    .save()
+    .then((user) => {
+      // console.log(user);
+      return res.redirect('/');
+    });
+});
 
+router.put('/:id', guard, (req, res) => {
+  return new Gallery
+    .save({
+      author: req.body.author,
+      link: req.body.link,
+      description: req.body.description
+    })
+    .then(() => {
+      return res.redirect('/')
+    })
+});
+
+router.delete('/:id', guard, (req, res) => {
+  
+})
 
 module.exports = router;
