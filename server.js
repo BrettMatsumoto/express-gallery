@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
+const methodOveride = require('method-override');
 const registerRoute = require('./routes/register');
 const userRoute = require('./routes/users');
 const indexRoute = require('./routes/index');
@@ -27,6 +28,7 @@ require('dotenv').config();
 
 const app = express();
 app.use(express.static('public'));
+app.use(methodOveride('_method'));
 app.engine('.hbs', exphbs({ 
   extname: '.hbs',
   partialsDir: __dirname + '/views/partials/',
@@ -67,7 +69,7 @@ passport.use(
             }
             //Error route: Username exists, password does not match
             else {
-              return done(null, false, { message: 'bad username or password' });
+              return done(null, false, { message: 'Invalid Credentials' });
             }
           });
         }
