@@ -11,19 +11,19 @@ exports.seed = function(knex, Promise) {
           author: 'McAuthor',
           link: 'https://assets.pernod-ricard.com/nz/media_images/test.jpg?hUV74FvXQrWUBk1P2.fBvzoBUmjZ1wct',
           description: 'this is first post',
-          user_id: 1,
+          user_id: 1
         },
         {
           author: 'McAuthor Jr',
           link: 'https://assets.pernod-ricard.com/nz/media_images/test.jpg?hUV74FvXQrWUBk1P2.fBvzoBUmjZ1wct',
           description: 'this is second post',
-          user_id: 2,
+          user_id: 2
         },
         {
           author: 'McAuthor Sr',
           link: 'https://assets.pernod-ricard.com/nz/media_images/test.jpg?hUV74FvXQrWUBk1P2.fBvzoBUmjZ1wct',
           description: 'this is third post',
-          user_id: 3,
+          user_id: 3
         },
       ]);
     });
