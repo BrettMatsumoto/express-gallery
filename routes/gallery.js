@@ -39,7 +39,7 @@ router.get('/:id', guard, (req, res) => {
   });
 });
 
-router.post('/gallery/new', guard, (req, res) => {
+router.post('/new', guard, (req, res) => {
   return new Gallery({
     author: req.body.author,
     link: req.body.link,
