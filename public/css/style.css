@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 body{
     background-image: url("../Resources/dust_scratches.png");
     background-size: cover;
@@ -47,29 +46,6 @@ img {
     margin-right: 100px;
     border-left: 1px dotted black;
     padding-top: 20px;
-=======
-
-#header{
-    display: flex;
-    border-top: 1px dotted grey;
-    margin-top: 30px;
-    margin-right: 150px;
-    margin-left: 150px;
-}
-
-#title{
-    font-size: 90px;
-    margin-right: 150px;
-    margin-left: 150px;
-    border-right: 1px dotted grey;
-    padding-right: 180px;
-    padding-top: 25px;
-}
-
-#headerDescription{
-    font-size: 20px;
-    margin-right: 100px;
->>>>>>> 37d499f7b83bb8168bf2a1eaed8a1728291aa722
 }
 
 #bigPicture{
@@ -77,7 +53,6 @@ img {
     justify-content: center;
 }
 
-<<<<<<< HEAD
 #rightLink{
     width: 500px;;
 }
@@ -89,9 +64,4 @@ img {
 
 .smallPictures{
     width: 30%;
-=======
-#Pictures{
-    display: flex;
-    
->>>>>>> 37d499f7b83bb8168bf2a1eaed8a1728291aa722
 }
