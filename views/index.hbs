@@ -12,25 +12,36 @@
   {{> header}}
   <div id="header">
     <div id="title">_ARCHITEKT</div>
-    <h4 id="titleDesc">Welcome to our online portfolio, we are a small group of passionate designers and architects, looking to change
-      and create amazing digital images to inspire others to follow in our innovate steps. Free Architect WordPress</h4>
-  </div>
-  <div id="pictures">
-      <a href="/gallery/{{id}}" id="bigPicture">
-        <img src='{{link}}'>
-        <h4>{{author}}</h4>
-        <h4>{{description}}</h4>
-      </a>
-  {{#each smallPictures}}
-    <div id="smallPictures">
-      <a href="/gallery/{{id}}" class="smallPictures">
-        <img src="{{link}}">
-        <h4>{{author}}</h4>
-        <h4>{{description}}</h4>
-      </a>
+    <div id="titleDesc">Welcome to our online portfolio, we are a small group of passionate designers and architects,
+      looking to change
+      and create amazing digital images to inspire others to follow in our innovate steps. Free Architect WordPress.
     </div>
-  {{/each}}
   </div>
+
+  <div id="bigPicture">
+    <a href="/gallery/{{id}}" id="bigImg">
+      <img src='{{link}}'>
+      <h4>{{author}}</h4>
+      <h4>{{description}}</h4>
+    </a>
+  </div>
+
+  <div id="smallPictureContainer">
+    {{#each smallPictures}}
+    <a href="/gallery/{{id}}">
+      <div class="smallPictures">
+        <img src="{{link}}">
+        <div id="leftLink">
+          <h4>{{author}}</h4>
+        </div>
+        <div id="rightLink">
+          <h4>{{description}}</h4>
+        </div>
+      </div>
+    </a>
+    {{/each}}
+  </div>
+
 </body>
 
 </html>
