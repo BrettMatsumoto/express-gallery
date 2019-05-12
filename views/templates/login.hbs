@@ -5,22 +5,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Document</title>
+  <title>Login</title>
+  <link rel="stylesheet" href="css/loginStyle.css">
 </head>
 
 <body>
 
-  <div>
+  <div id="navButtons">
     <a href="./">
-      <button>Home</button>
+      <button class="navButton">Home</button>
     </a>
-  </div>
-  <div>
     <a href="./register">
-      <button>Register</button>
+      <button class="navButton">Register</button>
     </a>
   </div>
-  <form action="/login" method="POST">
+
+  <form action="/login" method="POST" id='loginBox'>
     <div>
       <label>Username:</label>
       <input type="text" name="username" />

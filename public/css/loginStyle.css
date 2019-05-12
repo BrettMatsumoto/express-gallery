@@ -1,0 +1,33 @@
+body {
+  background-image: url('../Resources/dust_scratches.png');
+  background-size: cover;
+}
+
+#navButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border: none;
+  text-align: center;
+  padding: 15px 32px;
+  background-color: grey;
+  text-decoration: none;
+}
+
+.navButton {
+  padding: 15px 32px;
+}
+
+#loginBox {
+  border: 1px solid black;
+  width: 50%;
+  margin-top: 10%;
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-bottom: 25%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  padding-left: 25px;
+  display: flex;
+  justify-content: space-evenly;
+}
