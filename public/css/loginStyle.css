@@ -21,7 +21,7 @@ body {
 #loginBox {
   border: 1px solid black;
   width: 50%;
-  margin-top: 10%;
+  margin-top: 5%;
   margin-left: 25%;
   margin-right: 25%;
   margin-bottom: 25%;
@@ -30,4 +30,9 @@ body {
   padding-left: 25px;
   display: flex;
   justify-content: space-evenly;
+  background-color: rgba(240, 248, 255, .5);
+}
+
+#termsOfService{
+    border: 1px solid black;
 }

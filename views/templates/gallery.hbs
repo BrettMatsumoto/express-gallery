@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Gallery {{id}}</title>
+    <link rel="stylesheet" href="css/galleryStyle.css">
 </head>
 
 <body>
@@ -37,8 +38,6 @@
             <form action="/gallery/{{id}}?_method=DELETE" method="POST">
                 <button>Delete Image</button>
             </form>
-            {{!-- <a href="/gallery/{{id}}?_method=DELETE" method="POST">
-            </a> --}}
             <a href="/gallery/{{id}}/edit">
                 <button>Update Image</button>
             </a>
